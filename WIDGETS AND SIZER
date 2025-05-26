@@ -1,0 +1,32 @@
+import wx
+
+class MyFrame(wx.Frame):
+    def __init__(self):
+        super().__init__(parent=None, title='Hello World')
+        panel = wx.Panel(self)
+        my_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        self.text_ctrl = wx.TextCtrl(panel)
+        my_sizer.Add(self.text_ctrl, 0, wx.ALL | wx.EXPAND, 5)
+
+        my_btn = wx.Button(panel, label='Press Me')
+        my_sizer.Add(my_btn, 0, wx.ALL | wx.CENTER, 5)
+
+        radio_btn1 = wx.RadioButton(panel, label='MALE')
+        my_sizer.Add(radio_btn1, 0, wx.ALL , 5)
+        radio_btn1 = wx.RadioButton(panel, label='FEMALE')
+        my_sizer.Add(radio_btn1, 0, wx.ALL , 5)
+
+        checkbox = wx.CheckBox(panel, label="Check Me")
+        my_sizer.Add(checkbox, 0, wx.ALL | wx.CENTER, 5)
+
+        combo = wx.ComboBox(panel, choices=["Choice 1", "Choice 2", "Choice 3"], style=wx.CB_READONLY)
+        my_sizer.Add(combo, 0, wx.ALL | wx.CENTER, 5)
+
+        panel.SetSizer(my_sizer)
+        self.Show()
+
+if __name__ == '__main__':
+    app = wx.App()
+    frame = MyFrame()
+    app.MainLoop()
