@@ -1,0 +1,43 @@
+import wx
+
+class MyFrame(wx.Frame):
+    def __init__(self):
+        super().__init__(parent=None, title='Hello World')
+        panel = wx.Panel(self)
+        my_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        self.text_ctrl = wx.TextCtrl(panel)
+        my_sizer.Add(self.text_ctrl, 0, wx.ALL | wx.EXPAND, 5)
+
+        my_btn = wx.Button(panel, label='Press Me')
+        my_btn.Bind(wx.EVT_BUTTON, self.on_press)
+        my_sizer.Add(my_btn, 0, wx.ALL | wx.CENTER, 5)
+
+        self.radio_male = wx.RadioButton(panel, label='MALE', style=wx.RB_GROUP)
+        my_sizer.Add(self.radio_male, 0, wx.ALL, 5)
+        self.radio_female = wx.RadioButton(panel, label='FEMALE')
+        my_sizer.Add(self.radio_female, 0, wx.ALL, 5)
+
+        self.checkbox = wx.CheckBox(panel, label="Check Me")
+        my_sizer.Add(self.checkbox, 0, wx.ALL | wx.CENTER, 5)
+
+        self.combo = wx.ComboBox(panel, choices=["Choice 1", "Choice 2", "Choice 3"], style=wx.CB_READONLY)
+        my_sizer.Add(self.combo, 0, wx.ALL | wx.CENTER, 5)
+
+        panel.SetSizer(my_sizer)
+        self.Show()
+
+    def on_press(self, event):
+        name = self.text_ctrl.GetValue()
+        gender = "Male" if self.radio_male.GetValue() else "Female"
+        is_checked = self.checkbox.GetValue()
+        combo_choice = self.combo.GetValue()
+
+        msg = f"Name: {name}\nGender: {gender}\nChecked: {is_checked}\nSelected: {combo_choice}"
+        wx.MessageBox(msg, "Input Summary", wx.OK | wx.ICON_INFORMATION)
+
+
+if __name__ == '__main__':
+    app = wx.App()
+    frame = MyFrame()
+    app.MainLoop()
